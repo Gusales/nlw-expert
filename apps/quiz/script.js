@@ -94,15 +94,38 @@ const quests = [
 const quizContainer = document.querySelector('#quizContainer')
 const template = document.querySelector('template')
 
+const corrects = new Set()
+const totalQuests = quests.length
+
+const showTotal = document.querySelector('#hits span')
+showTotal.textContent = `${corrects.size} de ${totalQuests}`
 
 quests.map((quest) => {
   const quizItem = template.content.cloneNode(true)
 
   quizItem.querySelector('h3').textContent = quest.quest
-  quest.responses.map(response => {
+
+  quest.responses.map((response, index) => {
     const dt = quizItem.querySelector('dl dt').cloneNode(true)
 
     dt.querySelector('span').textContent = response
+    dt.querySelector('input').setAttribute('name', `quest-${quests.indexOf(quest)}`)
+    dt.querySelector('input').value = index
+
+    dt.querySelector('input').onchange = (event) => {
+      const thisResponseIsCorrect = event.target.value == quest.correct
+
+      if (thisResponseIsCorrect) {
+        corrects.add(quest)
+      }
+
+      if (!thisResponseIsCorrect) {
+        corrects.delete(quest)
+      }
+
+      showTotal.textContent = `${corrects.size} de ${totalQuests}`
+
+    }
 
     quizItem.querySelector('dl').appendChild(dt)
   })

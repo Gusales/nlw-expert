@@ -1,5 +1,157 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap");
+
 * {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+
+  font-family: 'Inter', sans-serif;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+}
+
+:root {
+  --lime-400: #a3e635;
+
+  --slate-100: #F1F5F9;
+  --slate-200: #E2E8F0;
+  --slate-300: #cbd5e1;
+  --slate-400: #94A3B8;
+  --slate-600: #475569;
+  --slate-700: #334155;
+  --slate-800: #1E293B;
+  --slate-900: #0F172A;
+}
+
+body {
+  background: var(--slate-900);
+}
+
+main {
+  max-width: 640px;
+
+  margin: 0 auto 64px;
+}
+
+header {
+  margin-top: 64px;
+
+  padding-bottom: 24px;
+
+  border-bottom: 1px solid var(--slate-700);
+
+}
+
+input {
+  all: unset;
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+
+  border: 1px solid var(--slate-400);
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+input:checked {
+  border: 1px solid var(--lime-400);
+}
+
+input:checked::before {
+  content: "";
+  width: 10px;
+  height: 10px;
+
+  background: var(--lime-400);
+  border-radius: 50%;
+}
+
+header h1 {
+  margin-top: 24px;
+
+  font-size: 30px;
+  color: var(--slate-100);
+}
+
+.quiz-item {
+  margin-top: 24px;
+
+  border: 1px solid var(--slate-600);
+  border-radius: 6px;
+
+  overflow: hidden;
+}
+
+.quiz-item h3 {
+  padding: 16px 20px;
+
+  color: var(--slate-200);
+
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  background: var(--slate-800);
+}
+
+.quiz-item dl {
+  padding: 20px 24px;
+
+  display: grid;
+  gap: 8px;
+}
+
+.quiz-item dl dt {
+  font-size: 14px;
+  line-height: 24px;
+  letter-spacing: 0;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+
+  color: var(--slate-200);
+}
+
+#quizContainer {
+  counter-reset: quiz-item;
+}
+
+.quiz-item h3::before {
+  counter-increment: quiz-item;
+  content: counter(quiz-item);
+
+  background: var(--slate-600);
+  width: 28px;
+  height: 28px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+
+  border-radius: 50%;
+
+  font-size: 12px;
+}
+
+#hits {
+  width: 100vw;
+  background: var(--lime-400);
+
+  padding: 0.75rem;
+
+  text-align: center;
+
+  position: fixed;
+  bottom: 0;
 }
